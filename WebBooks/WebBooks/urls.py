@@ -34,6 +34,8 @@ urlpatterns = [
  re_path(r'^book/create/$', views.BookCreate.as_view(), name='book_create'),
  re_path(r'^book/update/(?P<pk>\d+)$', views.BookUpdate.as_view(), name='book_update'),
  re_path(r'^book/delete/(?P<pk>\d+)$', views.BookDelete.as_view(), name='book_delete'),
+ path('start1/', views.start1, name='start1'),
+ path('colorbg/', views.colorbg, name='colorbg'),
 ]
 #делаю через репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\

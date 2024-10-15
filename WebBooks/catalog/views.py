@@ -32,6 +32,14 @@ def index(request):
  'num_visits': num_visits},
  )
 
+
+def start1(request):
+ return render (request, "start1.html")
+
+def colorbg(request):
+ return render (request, "color_bg.html")
+
+
 class BookListView(generic.ListView):
  model = Book
 
