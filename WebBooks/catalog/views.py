@@ -32,6 +32,11 @@ def index(request):
  'num_visits': num_visits},
  )
 
+def colortextbg(request):
+ return render (request, "color_text_bg.html")
+
+def colortext(request):
+ return render (request, "color-text.html")
 
 def start1(request):
  return render (request, "start1.html")
