@@ -34,10 +34,26 @@ urlpatterns = [
  re_path(r'^book/create/$', views.BookCreate.as_view(), name='book_create'),
  re_path(r'^book/update/(?P<pk>\d+)$', views.BookUpdate.as_view(), name='book_update'),
  re_path(r'^book/delete/(?P<pk>\d+)$', views.BookDelete.as_view(), name='book_delete'),
+
+
+
+
+
+
  path('start1/', views.start1, name='start1'),
  path('colorbg/', views.colorbg, name='colorbg'),
  path('colortext/', views.colortext, name='colortext'),
  path('colortextbg/', views.colortextbg, name='colortextbg'),
+ path('space1/', views.space1, name='space1'),
+ path('space2/', views.space2, name='space2'),
+ path('space3/', views.space3, name='space3'),
+ path('aligment1/', views.aligment1, name='aligment1'),
+ path('aligment2/', views.aligment2, name='aligment2'),
+ path('border1/', views.border1, name='border1'),
+ path('border2/', views.border2, name='border2'),
+ path('bordercolor/', views.bordercolor, name='bordercolor'),
+ path('borderradius/', views.borderradius, name='borderradius'),
+ path('borderradius1/', views.borderradius1, name='borderradius1'),
 ]
-#делаю через репаф потому что url убрали(( цитирую:
+#делаю  репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\

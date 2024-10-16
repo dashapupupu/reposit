@@ -32,6 +32,43 @@ def index(request):
  'num_visits': num_visits},
  )
 
+
+
+
+
+
+
+
+def borderradius1(request):
+ return render (request, "border_radius_1.html")
+
+def borderradius(request):
+ return render (request, "border_radius.html")
+
+def bordercolor(request):
+ return render (request, "border_color.html")
+
+def border2(request):
+ return render (request, "border_2.html")
+
+def border1(request):
+ return render (request, "border_1.html")
+
+def aligment2(request):
+ return render (request, "aligment_2.html")
+
+def aligment1(request):
+ return render (request, "aligment_1.html")
+
+def space3(request):
+ return render (request, "space_3.html")
+
+def space2(request):
+ return render (request, "space_2.html")
+
+def space1(request):
+ return render (request, "space_1.html")
+
 def colortextbg(request):
  return render (request, "color_text_bg.html")
 
@@ -43,6 +80,13 @@ def start1(request):
 
 def colorbg(request):
  return render (request, "color_bg.html")
+
+
+
+
+
+
+
 
 
 class BookListView(generic.ListView):
