@@ -39,6 +39,19 @@ def index(request):
 
 
 
+
+def table1(request):
+ return render (request, "table_1.html")
+
+def table(request):
+ return render (request, "table.html")
+
+def start2(request):
+ return render (request, "start2.html")
+
+def start(request):
+ return render (request, "start.html")
+
 def borderradius1(request):
  return render (request, "border_radius_1.html")
 
