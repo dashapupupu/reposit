@@ -40,6 +40,13 @@ def index(request):
 
 
 
+
+def index(request):
+ return render(request, "catalog/index.html")
+
+
+
+
 def table1(request):
  return render (request, "table_1.html")
 

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>{% block title %}{% endblock title %}</title>
+</head>
+<body>
+ <h1>Логотип и Заголовок сайта</h1>
+ <h4>Главная страница О компании Контакты</h4>
+ <div>{% block header%}{% endblock header %}</div>
+ <div>{% block content%}{% endblock content %}</div>
+ <h5>Подвал (footer) сайта</h5>
+</body>
+</html>
