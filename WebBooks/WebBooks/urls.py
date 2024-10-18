@@ -56,8 +56,9 @@ urlpatterns = [
  path('table/', views.table, name='table'),
  path('table1/', views.table1, name='table1'),
 
-
- path('index/', views.index, name='index'),
+ path('about/', views.about),
+ path('index/', views.index2, name='index2'),
+ path('contact/', views.contact),
 ]
 #делаю  репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\

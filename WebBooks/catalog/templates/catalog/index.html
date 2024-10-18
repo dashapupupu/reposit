@@ -1,7 +1,22 @@
-{% extends "firstapp/base.html" %}
+{% extends "catalog/base.html" %}
 {% block title %}Главная страница{% endblock title %}
-{% block header %}Это главная страница сайта - index.html.{% endblock header %}
+{% block header %}Это главная страница сайта - index.html{% endblock header %}
 {% block content%}
- Это содержимое блока content. Этот текст находится на странице index.html,
- но он вставлен в базовый шаблон - base.html в блок с именем context.
+ Месяцы (поквартально)
+ <div class="container-fluid my-2 text-start">
+ <div class="row">
+ <div class="col-6 text-end">
+ {% for kv in my_kv %}
+ <div>{{ kv }}</div>
+ {% endfor %}
+ </div>
+ <div class="col-6">
+ <div class="row">
+ {% for month in my_month %}
+ <div class="col-4">{{ month }}</div>
+ {% endfor %}
+ </div>
+ </div>
+ </div>
+ </div>
 {% endblock content %}
