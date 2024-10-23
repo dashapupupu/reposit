@@ -7,6 +7,9 @@ from django.http import *
 from .forms import AuthorsForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from .forms import UserForm
+from django.shortcuts import redirect 
+
 
 def index(request):
   # Генерация "количеств" некоторых главных объектов
@@ -57,6 +60,31 @@ def index2(request):
 
 def contact(request):
  return render(request, "catalog/contact.html")
+
+
+
+
+
+
+def myform(request):
+    if request.method == 'POST':
+        form = UserForm(request.POST, request.FILES)
+        if form.is_valid():
+            # Обработать файл (сохранить, загрузить, т.д.)
+            return redirect('myform/')  # перенаправить на страницу успешной загрузки
+    else:
+        form = UserForm()
+    return render(request, "my_form.html", {'form': form})
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -15,3 +15,7 @@ class AuthorsForm(forms.Form):
         fields = ['title', 'genre', 'language', 'author', 'summary', 'isbn']
 labels = {' summary ': ('Аннотация'), }
 help_texts = {' summary ': ('Не более 1000 символов'), }
+
+class UserForm(forms.Form):
+ uuid_text = forms.UUIDField(label="Введите UUID",
+ help_text="Формат xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx")

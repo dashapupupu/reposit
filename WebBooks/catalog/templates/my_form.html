@@ -1,0 +1,10 @@
+{% extends "catalog/base.html" %}
+{% block title %}Изучаем формы Django{% endblock title %}
+{% block content %}
+    <h1>Загрузка файла</h1>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Отправить</button>
+    </form>
+{% endblock %}

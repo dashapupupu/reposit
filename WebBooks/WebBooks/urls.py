@@ -59,6 +59,8 @@ urlpatterns = [
  path('about/', views.about),
  path('index/', views.index2, name='index2'),
  path('contact/', views.contact),
+
+ path('myform/', views.myform, name='myform'),
 ]
 #делаю  репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\
