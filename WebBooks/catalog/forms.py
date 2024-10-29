@@ -16,6 +16,3 @@ class AuthorsForm(forms.Form):
 labels = {' summary ': ('Аннотация'), }
 help_texts = {' summary ': ('Не более 1000 символов'), }
 
-class UserForm(forms.Form):
- email = forms.EmailField(label="Электронный адрес",
- help_text="Обязательный символ - @")
