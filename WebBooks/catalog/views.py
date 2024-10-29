@@ -44,11 +44,11 @@ def index(request):
 def index(request):
  my_text = 'Изучаем формы Django'
  context = {'my_text': my_text}
- return render(request, "catalog/index.html", context)
+ return render(request, "/index.html", context)
 def about(request):
- return render(request, "catalog/about.html")
+ return render(request, "/about.html")
 def contact(request):
- return render(request, "catalog/contact.html")
+ return render(request, "/contact.html")
 def my_form(request):
  if request.method == "POST":
   userform = UserForm(request.POST)
