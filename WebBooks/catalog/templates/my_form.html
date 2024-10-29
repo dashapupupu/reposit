@@ -1,10 +1,20 @@
 {% extends "catalog/base.html" %}
-{% block title %}Изучаем формы Django{% endblock title %}
+{% block title %}Формы{% endblock title %}
+{% block header %}Изучаем формы Django{% endblock header %}
 {% block content %}
-    <h1>Загрузка файла</h1>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Отправить</button>
-    </form>
-{% endblock %}
+<div class="container-fluid text-start my-2
+ border border-5 border-warning">
+ <h5>Стилизация группы полей</h5>
+ <form method="POST">
+ {% csrf_token %}
+ <div class="form-group my-2">
+ {% for field in form %}
+ <div>{{field.label_tag}}</div>
+ <div>{{field}}</div>
+ <div class="error">{{field.errors}}</div>
+ {% endfor %}
+ </div>
+ <input type="submit" value="Отправить" >
+ </form>
+</div>
+{% endblock content %}
