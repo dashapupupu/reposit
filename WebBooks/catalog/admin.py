@@ -21,11 +21,15 @@ class BookAdmin(admin.ModelAdmin):
 
 
 
-
-admin.site.register(Genre)
-admin.site.register(Language)
-admin.site.register(Status)
-
+#лз19
+admin.site.register(Author) 
+admin.site.register(Book) 
+admin.site.register(Genre) 
+admin.site.register(Language) 
+admin.site.register(Publisher) #новая строка
+admin.site.register(Status) 
+admin.site.register(BookInstance)
+#конец
 
 
 
