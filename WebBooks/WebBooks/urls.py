@@ -18,6 +18,9 @@ from django.contrib import admin
 from django.urls import path, include
 from django.urls import re_path
 from catalog import views
+from django.conf import settings
+from django.conf.urls.static import static
+
 
 urlpatterns = [
  path('', views.index, name='index'),
@@ -34,7 +37,13 @@ urlpatterns = [
  re_path(r'^book/create/$', views.BookCreate.as_view(), name='book_create'),
  re_path(r'^book/update/(?P<pk>\d+)$', views.BookUpdate.as_view(), name='book_update'),
  re_path(r'^book/delete/(?P<pk>\d+)$', views.BookDelete.as_view(), name='book_delete'),
+ 
  path('publisher/', views.publisher_list, name='publisher_list'),
+
+ path('', include('templates.urls')), 
+ path('admin/', admin.site.urls),
 ]
+if settings.DEBUG: 
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 #делаю  репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\

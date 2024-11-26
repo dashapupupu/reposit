@@ -8,6 +8,8 @@ from .forms import AuthorsForm, UserForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+def index(request):
+  return HttpsResponse ("Главная страница сайта Мир Книг!!")
 
 def publisher_list(request):
     publishers = Publisher.objects.annotate(book_count=models.Count('book'))
@@ -29,6 +31,12 @@ def index(request):
   num_visits = request.session.get('num_visits', 0)
   request.session['num_visits'] = num_visits + 1
  # Отрисовка HTML-шаблона index.html с данными внутри переменной context
+ # Словарь для передачи данных в шаблон 
+  text_head = 'Это заголовок главной страницы сайта' 
+  text_body = 'Это содержимое главной страницы сайта' 
+  context = {'text_head': text_head, 'text_body': text_body} 
+  # передача словаря context с данными в шаблон 
+  return render(request, 'catalog/index.html', context) 
  
   return render(request, 'index.html',
  context={'num_books': num_books,
