@@ -1,14 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .models import Book, Author, BookInstance, Genre
+from .models import Book, Author, BookInstance, Genre, Publisher, Book
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import *
-from .forms import AuthorsForm
+from .forms import AuthorsForm, UserForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from .forms import UserForm
-from django.shortcuts import redirect 
+
+
+def publisher_list(request):
+    publishers = Publisher.objects.annotate(book_count=models.Count('book'))
+    context = {'publisher_list': publishers}
+    return render(request, 'publisher/publisher_list.html', context)
 
 
 def index(request):
