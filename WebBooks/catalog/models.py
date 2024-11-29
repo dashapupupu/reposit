@@ -23,19 +23,21 @@ class Language(models.Model):
 # издательство 
 class Publisher(models.Model): 
    name = models.CharField(max_length=20, help_text=" Введите наименование издательства", verbose_name="Издательство") 
+
 def __str__(self): 
-   return self.name 
+    return self.name 
  
 # авторы 
 class Author(models.Model): 
    first_name = models.CharField(max_length=100, help_text="Введите имя автора", verbose_name="Имя автора") 
    last_name = models.CharField(max_length=100, help_text="Введите фамилию автора", verbose_name="Фамилия автора") 
    date_of_birth = models.DateField(help_text="Введите дату рождения", verbose_name="Дата рождения", null=True, blank=True) 
-   about = models.TextField(help_text="Введите сведения об авторе", verbose_name="Сведения об авторе") 
+   about = models.TextField(help_text="Введите сведения об авторе", verbose_name="Сведения об авторе", null=True, blank=True) 
    photo = models.ImageField(upload_to='images', help_text="Введите фото автора", verbose_name="Фото автора", null=True, blank=True) 
 def display_author(self):
-   return ','.join([author.last_name for author in self.author.all()])
    display_author.short_description = 'Авторы'
+   return ','.join([author.last_name for author in self.author.all()])
+   
 def __str__(self):
    return self.title
  
@@ -45,12 +47,12 @@ class Book(models.Model):
    genre = models.ForeignKey('Genre', on_delete=models.CASCADE, help_text=" Выберите жанр для книги", verbose_name="Жанр книги", null=True) 
    language = models.ForeignKey('Language', on_delete=models.CASCADE, help_text="Выберите язык книги", verbose_name="Язык книги", null=True) 
    publisher = models.ForeignKey('Publisher', on_delete=models.SET_NULL, help_text="Выберите издательство", verbose_name="Издательство", null=True, blank=True) 
-   year = models.CharField(max_length=4, help_text="Введите год издания", verbose_name="Год издания") 
+   year = models.CharField(max_length=4, help_text="Введите год издания", verbose_name="Год издания", null=True, blank=True) 
    author = models.ManyToManyField('Author', help_text="Выберите автора (авторов) книги", verbose_name="Автор (авторы) книги") 
    summary = models.TextField(max_length=1000, help_text="Введите краткое описание книги", verbose_name="Аннотация книги") 
    isbn = models.CharField(max_length=13, help_text="Должно содержать 13 символов", verbose_name="ISBN книги") 
-   price = models.DecimalField(decimal_places=2, max_digits=7, help_text="Введите цену книги", verbose_name="Цена (руб.)") 
-   photo = models.ImageField(upload_to='images', help_text="Введите изображение обложки", verbose_name="Изображение обложки")
+   price = models.DecimalField(decimal_places=2, max_digits=7, help_text="Введите цену книги", verbose_name="Цена (руб.)", null=True, blank=True) 
+   photo = models.ImageField(upload_to='images', help_text="Введите изображение обложки", default="Нет фотографий обложки", verbose_name="Изображение обложки")
 
 def __str__(self): 
    return self.title 
@@ -58,13 +60,10 @@ def __str__(self):
 def get_absolute_url(self):
         return reverse('book-detail', args=[str(self.id)])
 
-def display_author(self):
-   return ",".join([author.last_name for author in self.author.all()])
-   display_author.short_description = 'Авторы'
-
 # состояние экземпляра книги 
 class Status(models.Model):
  name = models.CharField(max_length=20, help_text="Введите статус экземпляра книги", verbose_name="Статус экземпляра книги")
+ 
 def __str__(self):
     return self.name
 

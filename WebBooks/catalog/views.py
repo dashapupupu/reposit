@@ -7,55 +7,45 @@ from django.http import *
 from .forms import AuthorsForm, UserForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-
-def index(request):
-  return HttpsResponse ("Главная страница сайта Мир Книг!!")
+from django.views.generic import ListView, DetailView
 
 def publisher_list(request):
-    publishers = Publisher.objects.annotate(book_count=models.Count('book'))
-    context = {'publisher_list': publishers}
-    return render(request, 'publisher/publisher_list.html', context)
+  publishers = Publisher.objects.annotate(book_count=models.Count('book'))
+  context = {'publisher_list': publishers}
+  return render(request, 'publisher/publisher_list.html', context)
 
 
-def index(request):
-  # Генерация "количеств" некоторых главных объектов
-  num_books = Book.objects.all().count()
-  num_instances = BookInstance.objects.all().count()
+def index(request): 
+  text_head = 'На нашем сайте вы можете получить книги в электронном виде' 
+  # Данные о книгах и их количестве 
+  books = Book.objects.all() 
+  num_books = Book.objects.all().count() 
 
- # Доступные книги (статус = 'На складе')
-  num_instances_available = BookInstance.objects.filter(status__exact=2).count()
-  num_authors = Author.objects.count() # Метод 'all()' применен по умолчанию.
+  # Данные об экземплярах книг в БД 
+  num_instances = BookInstance.objects.all().count() 
+  # Доступные книги (статус = 'На складе') 
+  num_instances_available = BookInstance.objects.filter( 
+      status__exact=2).count() 
 
- # Количество посещений этого view, подсчитанное
- # в переменной session
-  num_visits = request.session.get('num_visits', 0)
-  request.session['num_visits'] = num_visits + 1
- # Отрисовка HTML-шаблона index.html с данными внутри переменной context
- # Словарь для передачи данных в шаблон 
-  text_head = 'Это заголовок главной страницы сайта' 
-  text_body = 'Это содержимое главной страницы сайта' 
-  context = {'text_head': text_head, 'text_body': text_body} 
+  # Данные об авторах книг 
+  authors = Author.objects 
+  num_authors = Author.objects.count() 
+
+  # Словарь для передачи данных в шаблон index.html 
+  context = {'text_head': text_head, 
+          'books': books, 'num_books': num_books, 
+          'num_instances': num_instances, 
+          'num_instances_available': num_instances_available, 
+          'authors': authors, 'num_authors': num_authors} 
   # передача словаря context с данными в шаблон 
   return render(request, 'catalog/index.html', context) 
- 
-  return render(request, 'index.html',
- context={'num_books': num_books,
- 'num_instances': num_instances,
- 'num_instances_available':
- num_instances_available,
- 'num_authors': num_authors,
- 'num_visits': num_visits},
- )
+class BookListView(ListView): 
+  model = Book 
+  context_object_name = 'books' 
+class BookDetailView(DetailView): 
+  model = Book 
+  context_object_name = 'book' 
 
-class BookListView(generic.ListView):
- model = Book
-
-class BookDetailView(generic.DetailView):
- model = Book
-
-class BookListView(generic.ListView):
- model = Book
- paginate_by = 3
 
 class AuthorListView(generic.ListView):
  model = Author
