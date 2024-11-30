@@ -8,13 +8,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head> 
  
-
 <body> 
     <div class="container-fluid p-1 bg-primary text-white text-center"> 
         <div class="row"> 
             <div class="col-2 text-start"> 
-                <img src="{% static 'images/pp100.jpg' %}" width="70" 
-                                                          height="70"> 
+                <img src="{% static 'images/logotip.jpg' %}" width="70" height="70"> 
             </div> 
             <div class="col-10 "> 
                 <h3>Мир книг - печатные и электронные интерактивные книги</h3> 
@@ -26,8 +24,8 @@
         <div class="row bg-warning text-center"> 
             <h6> 
                 <a href="{% url 'index' %}">Главная страница</a> 
-                <a href="{% url 'index' %}">О компании</a> 
-                <a href="{% url 'index' %}">Контакты</a> 
+                <a href="{% url 'about' %}">О компании</a> 
+                <a href="{% url 'contact' %}">Контакты</a> 
             </h6> 
         </div> 
     </div> 
@@ -41,28 +39,47 @@
         <div class="row text-start text-body"> 
              <div class="col-2 "> 
                 {% block sidebar %} 
-                <nav class="nav flex-column"> 
-                    <a class="nav-link" href="{% url 'books' %}">Все книги</a> 
-                    <a class="nav-link" href="{% url 'index' %}">Все авторы</a> 
-                </nav> 
-                {% endblock sidebar %}
+                    <nav class="nav flex-column"> 
+                        <a class="nav-link" href="{% url 'books-list' %}">Все книги</a> 
+                        <a class="nav-link" href="{% url 'authors-list' %}">Все авторы</a> 
+                    </nav> 
+                {% endblock sidebar %} 
             </div> 
             <div class="col-10" > 
                 <div class="row text-center"> 
                  {% block content%} 
                  {% endblock content %} 
-                </div> 
-            </div> 
-        </div> 
-    </div> 
  
-    <div class="container-fluid"> 
-        <div class="row bg-info text-center text-dark small lh-sm pt-2"> 
-            {% block footer %} 
-                <p>Copyright ООО "Интеллектуальные информационные системы", 
-                   2023. Все права защищены</p> 
-            {% endblock footer%} 
+                <!-- пагинатор --> 
+                <div class="pagination">
+                    <span class="step-links">
+                    {% if page_obj.paginator.num_pages > 1 %}
+                        {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; Первая</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">Предыдущая</a>
+                        {% endif %}
+                        <span class="current">
+                        Стр. {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}.
+                        </span>
+                        {% if page_obj.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">Следующая</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">Предыдущая &raquo;</a>
+                        {% endif %}
+                    {% endif %}
+                        </span>
+                    </div> 
+            <!-- пагинатор --> 
+        </div> 
         </div> 
     </div> 
+</div> 
+<div class="container-fluid"> 
+<div class="row bg-info text-center text-dark small lh-sm pt-2 my-2"> 
+{% block footer %} 
+<p>Copyright ООО "Интеллектуальные информационные системы", 
+2024. Все права защищены</p> 
+{% endblock footer%} 
+</div> 
+</div> 
 </body> 
-</html> 
+</html>

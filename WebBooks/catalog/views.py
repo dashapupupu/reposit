@@ -40,17 +40,50 @@ def index(request):
     # передача словаря context с данными в шаблон 
     return render(request, 'catalog/index.html', context)
 
+def about(request):
+    text_head = 'Сведения о компании'
+    name = 'ООО "Интеллектуальные информационные системы"'
+    rab1 = 'Разработка приложений на основе' \
+    ' систем искусственного интеллекта'
+    rab2 = 'Распознавание объектов дорожной инфраструктуры'
+    rab3 = 'Создание графических АРТ-объектов на основе' \
+    ' систем искусственного интеллекта'
+    rab4 = 'Создание цифровых интерактивных книг, учебных пособий' \
+    ' автоматизированных обучающих систем'
+    context = {'text_head': text_head, 'name': name,
+    'rab1': rab1, 'rab2': rab2,
+    'rab3': rab3, 'rab4': rab4}
+    # передача словаря context с данными в шаблон
+    return render(request, 'catalog/about.html', context)
+def contact(request):
+    text_head = 'Контакты'
+    name = 'ООО "Интеллектуальные информационные системы"'
+    address = 'Москва, ул. Планерная, д.20, к.1'
+    tel = '495-345-45-45'
+    email = 'iis_info@mail.ru'
+    # Словарь для передачи данных в шаблон index.html
+    context = {'text_head': text_head,
+    'name': name, 'address': address,
+    'tel': tel,
+    'email': email}
+    # передача словаря context с данными в шаблон
+    return render(request, 'catalog/contact.html', context)
+
 class BookListView(ListView): 
     model = Book 
     context_object_name = 'books' 
+    paginate_by = 3 
 
 class BookDetailView(DetailView): 
     model = Book 
     context_object_name = 'book'
 
-class AuthorListView(generic.ListView):
- model = Author
- paginate_by = 4
+class AuthorDetailView(DetailView): 
+  model = Author
+
+class AuthorListView(ListView): 
+  model = Author 
+  paginate_by = 4
 
 class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
   """Универсальный класс представления списка книг, находящихся в заказе у текущего пользователя."""
