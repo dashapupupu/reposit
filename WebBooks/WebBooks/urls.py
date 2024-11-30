@@ -28,9 +28,10 @@ urlpatterns = [
  path('authors_add/', views.authors_add, name='authors_add'),
  path('admin/', admin.site.urls),
  path('accounts/', include('django.contrib.auth.urls')),
- path('books/', views.BookListView.as_view(), name='books'), 
+ path('books/', views.BookListView.as_view(), name='books'),
+ 
+ path('books/', views.BookListView.as_view(), name='books-list'), 
  path('books/<int:pk>/', views.BookDetailView.as_view(), name='book-detail'),
-# path('books/', views.BookListView.as_view(), name='books'),
 # re_path(r'^book/(?P<pk>\d+)$', views.BookDetailView.as_view(), name='book-detail'),
  re_path(r'^authors/$', views.AuthorListView.as_view(), name='authors'),
  re_path(r'^mybooks/$', views.LoanedBooksByUserListView.as_view(), name='my-borrowed'),
@@ -41,6 +42,7 @@ urlpatterns = [
  path('book/update/<int:pk>/', views.BookUpdate.as_view(), name='book_update'), 
  path('book/delete/<int:pk>/', views.BookDelete.as_view(), name='book_delete'), 
  path('publisher/', views.publisher_list, name='publisher_list'),
+ path('books/', views.BookListView.as_view(), name='books-list'), 
 ]
 if settings.DEBUG: 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
