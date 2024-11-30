@@ -39,11 +39,23 @@
         <div class="row text-start text-body"> 
              <div class="col-2 "> 
                 {% block sidebar %} 
-                    <nav class="nav flex-column"> 
-                        <a class="nav-link" href="{% url 'books-list' %}">Все книги</a> 
-                        <a class="nav-link" href="{% url 'authors-list' %}">Все авторы</a> 
-                    </nav> 
-                {% endblock sidebar %} 
+                 <nav class="nav flex-column"> 
+                  <a class="nav-link" href="{% url 'books-list' %}">Все книги</a> 
+                  <a class="nav-link" href="{% url 'authors-list' %}">Все авторы</a> 
+                  {% if user.is_authenticated %} 
+                    <a class="nav-link" 
+                     href="{% url 'edit_authors' %}">Редактор авторов</a> 
+                     <a class="nav-link"
+                     href="{% url 'logout'%}?next={{request.path}}">Выход</a> 
+                    <div>Вошел: {{ user.get_username }}</div> 
+                    <a class="nav-link" 
+                     href="{% url 'my-borrowed' %}">Мои заказы</a>
+                  {% else %} 
+                    <a class="nav-link" 
+                     href="{% url 'login'%}?next={{request.path}}">Вход</a> 
+                  {% endif %} 
+                 </nav> 
+                 {% endblock sidebar %} 
             </div> 
             <div class="col-10" > 
                 <div class="row text-center"> 

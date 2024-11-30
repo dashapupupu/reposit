@@ -4,16 +4,58 @@ from .models import Book, Author, BookInstance, Genre, Publisher, Book
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import *
-from .forms import AuthorsForm, UserForm
+from .forms import AuthorsForm, UserForm, Form_add_author
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView   
+
+
+def edit_authors(request): 
+  author = Author.objects.all() 
+  context = {'author': author} 
+  return render(request, "catalog/edit_authors.html", context) 
+
+# Создание нового автора в БД 
+def add_author(request): 
+  if request.method == 'POST': 
+    form = Form_add_author(request.POST, request.FILES) 
+    if form.is_valid(): 
+    # получить данные из формы 
+      first_name = form.cleaned_data.get("first_name") 
+      last_name = form.cleaned_data.get("last_name") 
+      date_of_birth = form.cleaned_data.get("date_of_birth") 
+      about = form.cleaned_data.get("about") 
+      photo = form.cleaned_data.get("photo") 
+      # создать объект для записи в БД 
+      obj = Author.objects.create( 
+        first_name=first_name, 
+        last_name=last_name, 
+        date_of_birth=date_of_birth, 
+        about=about, 
+        photo=photo) 
+      # сохранить полученные данные 
+      obj.save() 
+      # загрузить страницу со списком автором 
+    return HttpResponseRedirect(reverse('authors-list')) 
+  else: 
+    form = Form_add_author() 
+    context = {"form": form} 
+    return render(request, "catalog/authors_add.html", context)
+
+def delete(request, id): 
+  try: 
+     author = Author.objects.get(id=id) 
+     author.delete() 
+     return HttpResponseRedirect("edit_authors/") 
+  except: 
+    return HttpResponseNotFound("<h2>Автор не найден</h2>")
+
 
 def publisher_list(request):
     publishers = Publisher.objects.annotate(book_count=models.Count('book'))
     context = {'publisher_list': publishers}
     return render(request, 'publisher/publisher_list.html', context)
-
+    
 
 def index(request): 
   text_head = 'На нашем сайте вы можете получить книги в электронном виде' 
@@ -96,8 +138,7 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
   template_name = 'catalog/book_instance_list_borrowed_user.html'
   paginate_by = 10
 def get_queryset(self):
- BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
- return
+ return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
     
 
 def authors_add(request):

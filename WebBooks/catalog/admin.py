@@ -29,16 +29,12 @@ class BookAdmin(admin.ModelAdmin):
     def display_author(self, obj):
         return obj.author.name
 
-@admin.register(BookInstance)
-class BookinstanceAdmin (admin.ModelAdmin): 
-    list_filter = ('book', 'status')
-    fieldsets = (
-        ('Экземпляр книги', {
-            'fields': ('book', 'inv_nom')}),
-        ('Статус и окончание его действия',{
-            'fields': ('status', 'due_back')}),
-    )
-
+# Регистрируем класс BookInstanceAdmin для экземпляров книг  
+class BookInstanceAdmin(admin.ModelAdmin): 
+    list_display = ('book', 'status', 'borrower', 'due_back', 'id') 
+    list_filter = ('book', 'status') 
+    fieldsets = (('Экземпляр книги', {'fields': ('book', 'inv_nom')}), ('Статус и окончание его действия', {'fields': ('status', 'due_back', 'borrower')}),)
+admin.site.register(BookInstance)
 admin.site.register(Genre) 
 admin.site.register(Language) 
 admin.site.register(Publisher) 
