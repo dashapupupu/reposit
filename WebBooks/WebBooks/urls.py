@@ -48,5 +48,9 @@ urlpatterns = [
 ]
 if settings.DEBUG: 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns += [ 
+path('accounts/', include('django.contrib.auth.urls')), 
+]
 #делаю  репаф потому что url убрали(( цитирую:
  #django.conf.urls.url() was deprecated in Django 3.0, and is removed in Django 4.0+.\

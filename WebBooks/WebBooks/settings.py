@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',]
+    'django.contrib.staticfiles',
+    'django_cleanup',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -147,14 +149,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#my_car = requests.session['my_car']
-#mу_car = requests.session. get ('my_car', 'mini')
-#requests.session['my_car'] = 'mini'
-#requests.session['my_car'] ['wheels'] = 'alloy'
-#SESSION_SAVE_EVERY_REQUEST = True
+# my_car = requests.session['my_car']
+# mу_car = requests.session. get ('my_car', 'mini')
+# requests.session['my_car'] = 'mini'
+# del request.session['my_car']
+# requests.session['my_car'] ['wheels'] = 'alloy'
+# request.session.modified=True
+SESSION_SAVE_EVERY_REQUEST = True
 
 LOGIN_REDIRECT_URL = '/'
-
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
