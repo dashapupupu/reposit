@@ -1,0 +1,54 @@
+{% extends "catalog/base.html" %} 
+{% block title %}Мир книг{% endblock title %} 
+ 
+{% block header %} 
+    <h5>{{ text_head }}</h5> 
+{% endblock header %} 
+ 
+{% block content%} 
+    <div class="container-fluid my-2"> 
+        <div class="row bg-success text-white mx-2"> 
+            <div class="col text-center"> 
+                <p>Добро пожаловать на сайт <em>Мир книг</em>. Это очень 
+                   Простой веб-сайт, написанный на Django и Bootstrap. 
+                   Разработан на Python в качестве учебного примера с 
+                   использованием PyCharm.</p> 
+            </div> 
+        </div> 
+ 
+        <div class="row text-center text-dark lh-2"> 
+            <h4>Сведения из базы данных</h4> 
+        </div> 
+ 
+        <div class="row my-2 text-white"> 
+            <div class="col mx-2 bg-primary">Количество книг – 
+                                            {{num_books}}</div> 
+            <div class="col mx-2 bg-primary">На складе в наличие –  
+                                          {{num_instances}}</div> 
+            <div class="col mx-2 bg-primary">Количество авторов –  
+                                            {{num_authors}}</div> 
+        </div> 
+ 
+        <div class="row text-center text-dark lh-2"> 
+            <h3>Книги</h3> 
+        </div> 
+         {% if num_books > 0 %} 
+            <div class="row my-2"> 
+                {% for obj in books %} 
+                    <div class="card" style="width: 9rem;"> 
+                        <img src="{{ obj.photo.url }}" class="card-img-top"> 
+                        <div class="card-body"> 
+                            <p class="card-text small"> 
+                                {{obj.title}}, Цена:{{obj.price}} руб. 
+                            </p> 
+                        </div> 
+                    </div> 
+                {% endfor %} 
+            </div> 
+        {% endif %} 
+ 
+        <div class="row text-center text-dark lh-2"> 
+            <h6>Количество посещений данной страницы - {{ num_visits }}</h6> 
+        </div> 
+</div> 
+{% endblock content %} 

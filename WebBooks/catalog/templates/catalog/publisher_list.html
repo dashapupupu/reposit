@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+{% block content %}
+<h1>Список издателей</h1>
+{% if publisher_list %}
+<ul>
+    {% for publisher in publisher_list %}
+    <li>
+        {{ publisher.name }} ({{ publisher.book_count }} книг)
+        <a href="/publisher/detail/{{publisher.id}}">Подробнее</a>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>В базе данных нет издателей</p>
+{% endif %}
+{% endblock %}

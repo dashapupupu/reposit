@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,10 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',]
+    'django.contrib.staticfiles',
+    'django_cleanup',]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +59,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'WebBooks.urls'
+
+
+
+TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
+#лз18
+
 
 TEMPLATES = [
     {
@@ -88,8 +96,6 @@ DATABASES = {
     }
 }
 
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
 
 
 # Password validation
@@ -123,27 +129,46 @@ USE_I18N = True
 USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
 STATIC_URL = 'static/'
+#лз 18
+STATICFILES_DIRS = [ 
+    os.path.join(BASE_DIR, 'static'), 
+] 
+ 
+MEDIA_URL = '/media/' 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+#до сюда
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-#my_car = requests.session['my_car']
-#mу_car = requests.session. get ('my_car', 'mini')
-#requests.session['my_car'] = 'mini'
-#requests.session['my_car'] ['wheels'] = 'alloy'
-#SESSION_SAVE_EVERY_REQUEST = True
+# my_car = requests.session['my_car']
+# mу_car = requests.session. get ('my_car', 'mini')
+# requests.session['my_car'] = 'mini'
+# del request.session['my_car']
+# requests.session['my_car'] ['wheels'] = 'alloy'
+# request.session.modified=True
+SESSION_SAVE_EVERY_REQUEST = True
 
 LOGIN_REDIRECT_URL = '/'
 
-
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+""" это реальная отправка через smtp.gmail """ 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend' 
+EMAIL_HOST = 'smtp.gmail.com' 
+# EMAIL_USE_TLS = True 
+EMAIL_USE_SSL = True  # для отправки с gmail 
+EMAIL_PORT = 465 
+EMAIL_HOST_USER = "tatakae_04@mail.ru"  # от кого 
+EMAIL_HOST_PASSWORD = "igixklbpqideavza"  # пароль почты отправителя
 
 # Heroku: Обновление конфигурации базы данных из $DATABASE_URL.
 

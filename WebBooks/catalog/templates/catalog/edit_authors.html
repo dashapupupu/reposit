@@ -1,0 +1,38 @@
+{% extends "catalog/base.html" %} 
+{% block content %} 
+<div class="row text-start lh-2"> 
+<h5>Список авторов для редактирования</h5> 
+</div> 
+<div class="row"> 
+<div class="col-2 "></div> 
+<a href="/authors_add/{{authors_add}}">Добавить автора</a> 
+<div class="col-8 "> 
+<table class="table table-striped table-bordered text-start"> 
+<thead> 
+<tr> 
+<th>Id</th> 
+<th>Имя</th> 
+<th>Фамилия</th> 
+<th>Редактировать</th> 
+</tr> 
+</thead> 
+<tbody> 
+{% if author %} 
+{% for author in author.all %} 
+<tr> 
+<td>{{author.id}}</td> 
+<td>{{author.first_name}}</td> 
+<td>{{author.last_name}}</td> 
+<td><a href="/edit_author/{{author.id}}">Изменить</a> , 
+<a href="/delete/{{author.id}}">Удалить</a></td> 
+</tr> 
+{% endfor %} 
+{% else %} 
+<p> В базе данных нет авторов</p> 
+{% endif %} 
+<tbody> 
+</table> 
+</div> 
+<div class="col-2"></div> 
+</div> 
+{% endblock %}
