@@ -3,7 +3,6 @@
 <h1>Взятые книги</h1> 
 {% if bookinstance_list %} 
 {% for bookinst in bookinstance_list %} 
-для 
 <div class="{% if bookinst.is_overdue %} text-danger{% endif %}"> 
 <a href="{% url 'book-detail' bookinst.book.pk %}"> 
 {{bookinst.book.title}}</a> 

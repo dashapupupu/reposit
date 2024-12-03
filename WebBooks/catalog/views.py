@@ -7,7 +7,9 @@ from django.http import *
 from .forms import AuthorsForm, UserForm, Form_add_author
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
-from django.views.generic import ListView, DetailView   
+from django.views.generic import ListView, DetailView  
+from django.db.models import Count 
+
 
 
 def edit_authors(request): 
@@ -52,7 +54,7 @@ def delete(request, id):
 
 
 def publisher_list(request):
-    publishers = Publisher.objects.annotate(book_count=models.Count('book'))
+    publishers = Publisher.objects.annotate(book_count=Count('book'))
     context = {'publisher_list': publishers}
     return render(request, 'publisher/publisher_list.html', context)
     
