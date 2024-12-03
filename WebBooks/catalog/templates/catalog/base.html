@@ -48,6 +48,8 @@
                     <div>Вошел: {{ user.get_username }}</div> 
                     <a class="nav-link" 
                      href="{% url 'edit_authors' %}">Редактор авторов</a>
+                     <a class="nav-link" 
+                        href="{% url 'edit_books' %}">Редактор книг</a>
                     <a class="nav-link" 
                      href="{% url 'my-borrowed' %}">Мои заказы</a>
                   {% else %} 

@@ -1,0 +1,38 @@
+{% extends "catalog/base.html" %} 
+{% block content %} 
+ 
+<div class="row text-start lh-2"> 
+     <h5>Список книг для редактирования</h5> 
+</div> 
+ 
+    <div class="row"> 
+    <div class="col-2 "></div> 
+        <a href="{% url 'book_create' %}">Добавить книгу</a> 
+    <div class="col-8 "> 
+    <table class="table table-striped table-bordered text-start"> 
+        <thead> 
+            <tr> 
+                <th>Id</th> 
+                <th>Название книги</th> 
+                <th>Редактировать</th> 
+            </tr> 
+        </thead> 
+       <tbody> 
+       {% if book %} 
+         {% for book in book.all %} 
+           <tr> 
+              <td>{{book.id}}</td> 
+              <td>{{book.title}}</td> 
+              <td><a href="/book/update/{{book.id}}">Изменить</a> , 
+                  <a href="/book/delete/{{book.id}}">Удалить</a></td> 
+           </tr> 
+         {% endfor %} 
+       {% else %} 
+         <p> В базе данных нет книг</p> 
+       {% endif %} 
+        <tbody> 
+    </table> 
+    </div> 
+    <div class="col-2"></div> 
+    </div> 
+{% endblock %}

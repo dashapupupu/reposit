@@ -9,8 +9,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView  
 from django.db.models import Count 
-
-
+from django import forms
 
 def edit_authors(request): 
   author = Author.objects.all() 
@@ -43,6 +42,7 @@ def add_author(request):
     form = Form_add_author() 
     context = {"form": form} 
     return render(request, "catalog/authors_add.html", context)
+
 
 def delete(request, id): 
   try: 
@@ -141,7 +141,53 @@ class LoanedBooksByUserListView(LoginRequiredMixin, generic.ListView):
   paginate_by = 10
 def get_queryset(self):
  return BookInstance.objects.filter(borrower=self.request.user).filter(status__exact='2').order_by('due_back')
-    
+
+
+# форма для изменения сведений об авторах 
+class Form_edit_author(forms.ModelForm): 
+  class Meta: 
+    model = Author
+    fields = '__all__'
+
+# изменение данных об авторе в БД 
+def edit_author(request, id): 
+  author = Author.objects.get(id=id) 
+  # author = get_object_or_404(Author, pk=id) 
+  if request.method == "POST": 
+    instance = Author.objects.get(pk=id) 
+    form = Form_edit_author(request.POST, request.FILES, instance=instance) 
+    if form.is_valid(): 
+      form.save() 
+      return HttpResponseRedirect("/edit_authors/") 
+  else: 
+    form = Form_edit_author(instance=author) 
+    content = {"form": form} 
+    return render(request, "catalog/edit_author.html", content)
+
+
+# Класс для создания в БД новой записи о книге 
+class BookCreate(CreateView): 
+  model = Book 
+  fields = '__all__' 
+  success_url = reverse_lazy('edit_books') 
+
+# Класс для обновления в БД  записи о книге 
+class BookUpdate(UpdateView): 
+  model = Book 
+  fields = '__all__' 
+  success_url = reverse_lazy('edit_books') 
+
+# Класс для удаления из БД  записи о книге 
+class BookDelete(DeleteView): 
+  model = Book 
+  fields = '__all__'
+  success_url = reverse_lazy('edit_books')
+
+# вызов страницы для редактирования книг 
+def edit_books(request): 
+    book = Book.objects.all() 
+    context = {'book': book} 
+    return render(request, "catalog/edit_books.html", context)
 
 def authors_add(request):
   author = Author.objects.all()
@@ -177,6 +223,8 @@ def edit1(request, id):
   else:
     return render(request, "edit1.html", {"author": author})
   
+
+
 class BookCreate(CreateView):
  model = Book
  fields = '__all__'

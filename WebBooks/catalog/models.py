@@ -71,3 +71,4 @@ class BookInstance(models.Model):
 
     def __str__(self):
         return self.inv_nom
+
