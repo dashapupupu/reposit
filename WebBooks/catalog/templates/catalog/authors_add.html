@@ -1,17 +1,18 @@
 {% extends "catalog/base.html" %} 
 {% block content %} 
+
 <h5>Добавить в БД автора книги</h5> 
 <form action="" method="POST" enctype="multipart/form-data"> 
-{% csrf_token %} 
-<div class="row"> 
-<div class="col-2 "></div> 
-<div class="col-8 "> 
-<table class="table text-start"> 
-{{ form }} 
-</table> 
-</div> 
-<div class="col-2"></div> 
-</div> 
-<input type="submit" value="Сохранить" > 
-</form>
+    {% csrf_token %} 
+    <div class="row"> 
+         <div class="col-2 "></div> 
+         <div class="col-8 "> 
+            <table class="table text-start"> 
+             {{ form }} 
+             </table> 
+         </div> 
+        <div class="col-2"></div> 
+    </div> 
+    <input type="submit" value="Сохранить" > 
+</form> 
 {% endblock %}
