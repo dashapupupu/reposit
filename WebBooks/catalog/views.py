@@ -225,15 +225,15 @@ def edit1(request, id):
   
 
 
-class BookCreate(CreateView):
- model = Book
- fields = '__all__'
- success_url = reverse_lazy('books')
-class BookUpdate(UpdateView):
- model = Book
- fields = '__all__'
- success_url = reverse_lazy('books')
-class BookDelete(DeleteView):
- model = Book
- fields = '__all__'
- success_url = reverse_lazy('books')
+# class BookCreate(CreateView):
+#  model = Book
+#  fields = '__all__'
+#  success_url = reverse_lazy('books')
+# class BookUpdate(UpdateView):
+#  model = Book
+#  fields = '__all__'
+#  success_url = reverse_lazy('books')
+# class BookDelete(DeleteView):
+#  model = Book
+#  fields = '__all__'
+#  success_url = reverse_lazy('books')

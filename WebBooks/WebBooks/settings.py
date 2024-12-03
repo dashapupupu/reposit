@@ -27,6 +27,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 
 'cg#p$g+j9tax!#a3cup@1$8obt2_+&k3q+pmu)5%asj6yjpkag')
 
+# SECRET_KEY = os.environ['SECRET_KEY'] 
+# # ИЛИ чтение ключа из файла 
+# with open('/etc/secret_key.txt') as f: 
+#     SECRET_KEY = f.read().strip()
+
 # SECURITY WARNING: don't run with debug turned on in production!
 #DEBUG = True
 DEBUG = bool(os.environ.get('DJANGO_DEBUG', True))
@@ -69,7 +74,7 @@ TEMPLATE_DIR = os.path.join(BASE_DIR, "templates")
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'catalog/templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

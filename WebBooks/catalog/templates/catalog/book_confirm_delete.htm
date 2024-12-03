@@ -5,6 +5,5 @@
 <form action="" method="POST" enctype="multipart/form-data"> 
 {% csrf_token %} 
 <input type="submit" action="" value="Да, удалить" /> 
-<a href="{% url 'book-detail' book.pk %}">Отменить</a>
 </form> 
 {% endblock %}
