@@ -4,7 +4,7 @@ from .models import Book, Author, BookInstance, Genre, Publisher, Book
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import *
-from .forms import AuthorsForm, UserForm, Form_add_author
+from .forms import UserForm, Form_add_author
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView  
@@ -189,11 +189,11 @@ def edit_books(request):
     context = {'book': book} 
     return render(request, "catalog/edit_books.html", context)
 
-def authors_add(request):
-  author = Author.objects.all()
-  authorsform = AuthorsForm()
-  return render(request, "catalog/authors_add.html",
- {"form": authorsform, "author": author})
+# def authors_add(request):
+#   author = Author.objects.all()
+#   authorsform = AuthorsForm()
+#   return render(request, "catalog/authors_add.html",
+#  {"form": authorsform, "author": author})
 
 def create(request):
  if request.method == "POST":

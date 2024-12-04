@@ -5,7 +5,7 @@
 </div> 
 <div class="row"> 
 <div class="col-2 "></div> 
-<a href="/authors_add/{{authors_add}}">Добавить автора</a>
+<a href="/authors_add/{{authors_add}}">Добавить автора</a> 
 <div class="col-8 "> 
 <table class="table table-striped table-bordered text-start"> 
 <thead> 
@@ -23,7 +23,8 @@
 <td>{{author.id}}</td> 
 <td>{{author.first_name}}</td> 
 <td>{{author.last_name}}</td> 
-<td><a href="/edit_author/{{author.id}}">Изменить</a>, <a href="/delete/{{author.id}}">Удалить</a></td>
+<td><a href="/edit_author/{{author.id}}">Изменить</a> , 
+<a href="/delete/{{author.id}}">Удалить</a></td> 
 </tr> 
 {% endfor %} 
 {% else %} 
@@ -34,4 +35,4 @@
 </div> 
 <div class="col-2"></div> 
 </div> 
-{% endblock %}
+{% endblock %} 

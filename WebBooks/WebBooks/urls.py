@@ -28,7 +28,7 @@ urlpatterns = [
  path('about/', views.about, name='about'), 
  path('admin/', admin.site.urls),
  path('accounts/', include('django.contrib.auth.urls')),
- path('authors_add/', views.authors_add, name='authors_add'),
+#  path('authors_add/', views.authors_add, name='authors_add'),
  path('authors/', views.AuthorListView.as_view(), name='authors-list'),
  path('authors/<int:pk>/', views.AuthorDetailView.as_view(), name='authors-detail'),
  path('books/', views.BookListView.as_view(), name='books'),
