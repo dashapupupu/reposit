@@ -162,20 +162,23 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # request.session.modified=True
 SESSION_SAVE_EVERY_REQUEST = True
 
-LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.mail.ru'  
 EMAIL_PORT = 2525
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
-EMAIL_HOST_USER = "tatakae_04@mail.ru"  # от кого 
-EMAIL_HOST_PASSWORD = "igixklbpqideavza"  # пароль почты отправителя
-DEFAULT_FROM_EMAIL = "tatakae_04@mail.ru"
+EMAIL_HOST_USER = "kopochko345@mail.ru"  # от кого 
+EMAIL_HOST_PASSWORD = "NwZRruCe6qUJLAKLzHMY"  # пароль почты отправителя
+DEFAULT_FROM_EMAIL = "kopochko345@mail.ru"
 
 # Heroku: Обновление конфигурации базы данных из $DATABASE_URL.
 
+import logging
 
+logging.basicConfig(level=logging.DEBUG)
 # Статичные файлы (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 # Абсолютный путь к каталогу, в котором collectstatic

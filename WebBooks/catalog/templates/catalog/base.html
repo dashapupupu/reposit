@@ -43,9 +43,13 @@
                   <a class="nav-link" href="{% url 'books-list' %}">Все книги</a> 
                   <a class="nav-link" href="{% url 'authors-list' %}">Все авторы</a> 
                   {% if user.is_authenticated %}                      
-                     <a class="nav-link"
-                     href="{% url 'logout'%}?next={{request.path}}">Выход</a> 
-                    <div>Вошел: {{ user.get_username }}</div> 
+                  <form action="{% url 'admin:logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="nav-link" style="background: none; border: none; cursor: pointer; color: inherit;">
+                        Выход
+                    </button>
+                </form>
+                <div>Вошел: {{ user.get_username }}</div> 
                     <a class="nav-link" 
                      href="{% url 'edit_authors' %}">Редактор авторов</a>
                      <a class="nav-link" 

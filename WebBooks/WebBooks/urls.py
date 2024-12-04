@@ -20,6 +20,7 @@ from django.urls import re_path
 from catalog import views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth import views as auth_views
 
 
 urlpatterns = [
@@ -27,7 +28,7 @@ urlpatterns = [
 #  path('catalog/', include('catalog.urls')), 
  path('about/', views.about, name='about'), 
  path('admin/', admin.site.urls),
- path('accounts/', include('django.contrib.auth.urls')),
+
 #  path('authors_add/', views.authors_add, name='authors_add'),
  path('authors/', views.AuthorListView.as_view(), name='authors-list'),
  path('authors/<int:pk>/', views.AuthorDetailView.as_view(), name='authors-detail'),
@@ -52,6 +53,11 @@ urlpatterns = [
  path('book/create/', views.BookCreate.as_view(), name='book_create'), 
  path('book/update/<int:pk>/', views.BookUpdate.as_view(), name='book_update'), 
  path('book/delete/<int:pk>/', views.BookDelete.as_view(), name='book_delete'),
+ path('accounts/', include('django.contrib.auth.urls')),
+ 
+
+
+ path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout')
 ]
 if settings.DEBUG: 
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
